@@ -2,8 +2,15 @@
   <h1 v-if="!pokemon">Loading... Please wait</h1>
   <div v-else>
     <h1>Who's that Pokémon?</h1>
-    <PokemonPicture :pokemonId="pokemon.id" :showPokemon="false"/>
-    <PokemonOptions :pokemons="pokemonIds"/>
+
+    <PokemonPicture :pokemonId="pokemon.id" :showPokemon="this.showPokemon"/>
+
+    <PokemonOptions :pokemons="pokemonIds" @selection="checkAnswer"/>
+
+    <template v-if="showAnswer">
+      <h2 class="fade-in">{{ message }}</h2>
+      <button @click="newGame()">Next</button>
+    </template>
   </div>
 </template>
 
@@ -17,7 +24,10 @@ export default {
     data() {
         return {
             pokemonIds: [],
-            pokemon: null
+            pokemon: null,
+            showPokemon: false,
+            showAnswer: false,
+            message: ''
         }
     },
     methods: {
@@ -25,6 +35,21 @@ export default {
         this.pokemonIds = await getPokemonOptions();
 
         this.pokemon = this.pokemonIds[Math.floor(Math.random() * this.pokemonIds.length)];
+      },
+      checkAnswer(selectedId) {
+        this.showPokemon = true;
+        this.showAnswer = true;
+
+        this.message = selectedId === this.pokemon.id ? 'Correct' : 'Incorrect'
+        this.message +=`, it was ${this.pokemon.name.toUpperCase()}!`;
+      },
+      newGame() {
+        this.pokemon = null;
+        this.showPokemon = false;
+        this.showAnswer = false;
+        this.message = '';
+
+        this.mixPokemons();
       }
     },
     mounted() {
