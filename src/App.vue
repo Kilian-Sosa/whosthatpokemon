@@ -1,18 +1,17 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+  <img class="fade-in" alt="Vue logo" src="./assets/logo.png" />
+  <PokemonPage />
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
-import HelloWorld from "./components/HelloWorld.vue";
+import PokemonPage from './pages/PokemonPage.vue';
 
-@Options({
+export default {
+  name: 'App',
   components: {
-    HelloWorld,
-  },
-})
-export default class App extends Vue {}
+    PokemonPage
+  }
+}
 </script>
 
 <style>
