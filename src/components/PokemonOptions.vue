@@ -1,7 +1,7 @@
 <template>
   <div class="options-container">
     <ul>
-        <li v-for="pokemon in pokemons" :key="pokemon.id">{{ pokemon.name }}</li>
+        <li class="capitalize" v-for="pokemon in pokemons" :key="pokemon.id">{{ pokemon.name }}</li>
     </ul>
   </div>
 </template>
@@ -18,6 +18,10 @@ export default {
 </script>
 
 <style scoped>
+.capitalize {
+    text-transform: capitalize;
+}
+
 ul {
     list-style-type: none;
 }
