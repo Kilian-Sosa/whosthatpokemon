@@ -40,8 +40,8 @@ export default {
         this.showPokemon = true;
         this.showAnswer = true;
 
-        this.message = selectedId === this.pokemon.id ? 'Correct' : 'Incorrect'
-        this.message +=`, it was ${this.pokemon.name.toUpperCase()}!`;
+        this.message = selectedId === this.pokemon.id ? 'Correct' : 'Oops'
+        this.message +=`, it's ${this.pokemon.name.toUpperCase()}!`;
       },
       newGame() {
         this.pokemon = null;
